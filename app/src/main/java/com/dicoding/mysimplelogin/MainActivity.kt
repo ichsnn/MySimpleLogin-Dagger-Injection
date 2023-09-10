@@ -13,11 +13,17 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var userRepository: UserRepository
 
+    @Inject
+    lateinit var useRepository2: UserRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userRepository.checkInstance()
+        useRepository2.checkInstance()
 
         if (userRepository.isUserLogin()) {
             moveToHomeActivity()
